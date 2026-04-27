@@ -1,4 +1,6 @@
-#import <stdio.h>
+#include <stdio.h>
+#include <math.h>
+#import "estructuras.h"
 
 
 //Funcion que abrira el archivo txt con el mapa en caso de que exista
@@ -17,29 +19,48 @@ FILE recive_archivo(){
 	return archivo;
 }
 
-typedef struct{
-	char nombreCalle[50];
-	float x1, y1;
-	float x2, y2;
-	char sentido;
-}calle;
 
-typedef struct{
-	char nombre[50];
-	char ubicacion[50];
-	float altura;
-}punto;
+int cuenta_direcciones(calle calles[50]){
+	int nX = 0;
+	int nY = 0;
+	for(int i = 0; i<50; i++){
+		if(calles[i].sentido == 'X'){
+			nX++;
+		}else if(calles[i].sentido == 'Y'){
+			nY++;
+		}else{
+			continue;
+		}
+	}
+	return nX, nY;
+}
 
-
-int lee_archivo(FILE archivo){
-	calle calles[50]; //Arreglo de calles
-	punto puntos[50]; //Arreglo de puntos de interes
+//En esta función, desglosamos el archivo para trabajar con las calles y todo lo que contenga
+void lee_archivo(FILE archivo){
+	calle* calles[50]; //Arreglo de calles
+	punto* puntos[50]; //Arreglo de puntos de interes
 
 	int nPuntos=0;
 	int nCalles=0;
 	fscanf(archivo, "%d", &nCalle);
 
 	for(int i=0; i<nCalle; i++){
-		fscanf(archivo, "%s,%f,%f,%f,%f,%f,")
+		fscanf(archivo, "%s,%f,%f,%f,%f,%c", 
+			calles[i].nombreCalle, 
+			&calles[i].x1
+			&calles[i].y1
+			&calles[i].x2
+			&calles[i].y1
+			&calles[i].sentido
+			);
 	}
+
+	for(int i=0; i<nPuntos;í++){
+		fscanf(archivo, "%s,%s,%f",
+			puntos[i].nombre,
+			puntos[i].ubicacion,
+			&puntos[i].altura
+			);
+	}
+	printf(cuenta_direcciones(nCalles));
 }
