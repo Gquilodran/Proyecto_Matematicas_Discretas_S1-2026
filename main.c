@@ -1,9 +1,9 @@
 #include <stdio.h>
-#import "leecturaMapa.c"
+#include "leecturaMapa.c"
 
 int main(){
 	printf("Aqui esta el main");
-	FILE archivo = recive_archivo();
-	lee_archivo(archivo);
+	FILE *archivo = recive_archivo();
+	Datos mapaTuristico = lee_archivo(archivo);
 	return 0;
 }

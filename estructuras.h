@@ -14,4 +14,13 @@ typedef struct{
 	float altura;
 }punto;
 
+typedef struct{
+	calle calles[50];
+	punto puntos[50];
+	int nCalles;
+    int nPuntos;
+	int nX;
+	int nY;
+}Datos;
+
 #endif
