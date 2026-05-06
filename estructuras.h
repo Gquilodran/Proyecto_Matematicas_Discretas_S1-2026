@@ -11,7 +11,7 @@ typedef struct{
 typedef struct{
 	char nombre[50];
 	char ubicacion[50];
-	float altura;
+	double altura;
 }punto;
 
 typedef struct{
