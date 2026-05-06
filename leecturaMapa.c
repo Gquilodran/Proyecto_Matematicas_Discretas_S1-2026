@@ -6,14 +6,14 @@
 //Funcion que abrira el archivo txt con el mapa en caso de que exista
 FILE *recive_archivo(){
 	char Narchivo[100];
-	printf("Ingrese el nombre o ruta del arhivo con el mapa a probar:");
+	printf("Ingrese el nombre o ruta del arhivo con el mapa a probar:\n");
 	scanf("%s", Narchivo);
 
 	FILE *archivo = fopen(Narchivo, "r"); //Lo abrimos en modo lectura
 
 	if(archivo == NULL){
-		printf("El archivo  %s no se pudo abrir o no existe.", Narchivo);
-		return NULL;
+		printf("El archivo  %s no se pudo abrir o no existe.\n", Narchivo);
+		return recive_archivo();
 	}
 	return archivo;
 }
@@ -69,4 +69,8 @@ Datos lee_archivo(FILE *archivo){
 	}
 	printf("Sentidos X: %d, Sentidos Y: %d\n", mapaTuristico.nX, mapaTuristico.nY);
 	return mapaTuristico;
+}
+
+void ocupado(){
+	printf("Aqui deberia ir una funcion que calcule un punto");
 }
