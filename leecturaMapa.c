@@ -61,7 +61,7 @@ Datos lee_archivo(FILE *archivo){
 
 	fscanf(archivo, "%d", &mapaTuristico.nPuntos);
 	for(int i=0; i<mapaTuristico.nPuntos;i++){
-		fscanf(archivo, "%s %s %f",
+		fscanf(archivo, "%s %s %lf",
 			mapaTuristico.puntos[i].nombre,
 			&mapaTuristico.puntos[i].ubicacion,
 			&mapaTuristico.puntos[i].altura
