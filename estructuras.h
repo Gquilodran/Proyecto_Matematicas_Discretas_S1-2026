@@ -1,26 +1,46 @@
 #ifndef ESTRUCTURAS_H
 #define ESTRUCTURAS_H
 
-typedef struct{
+typedef struct {
 	char nombreCalle[50];
-	float x1, y1;
-	float x2, y2;
+	float x1,y1;
+	float x2,y2;
 	char sentido;
-}calle;
+} calle;
 
-typedef struct{
+typedef struct {
 	char nombre[50];
 	char ubicacion[50];
-	double altura;
-}punto;
+	float altura;
+	float x,y;
+	int indice_calle;
+} punto;
 
-typedef struct{
+typedef struct {
 	calle calles[50];
 	punto puntos[50];
 	int nCalles;
-    int nPuntos;
+	int nPuntos;
 	int nX;
 	int nY;
-}Datos;
+} Datos;
+
+#define MAX_NODOS 1300
+#define MAX_VECINOS 100
+#define MAX_CALLES_NODO 50
+
+typedef struct {
+	float x, y;
+	int calles[MAX_CALLES_NODO];
+	int n_calles;
+	int es_turistico;
+	int vecinos[MAX_VECINOS];
+	int n_vecinos;
+} nodo;
+
+typedef struct {
+	nodo nodos[MAX_NODOS];
+	int n_nodos;
+} Grafo;
 
 #endif

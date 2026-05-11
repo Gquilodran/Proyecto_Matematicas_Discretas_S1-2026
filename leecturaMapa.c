@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <math.h>
 #include "estructuras.h"
 
 
@@ -9,9 +8,9 @@ FILE *recive_archivo(){
 	printf("Ingrese el nombre o ruta del archivo con el mapa a probar:\n");
 	scanf("%s", Narchivo);
 
-	FILE *archivo = fopen(Narchivo, "r"); //Lo abrimos en modo lectura
+	FILE *archivo=fopen(Narchivo, "r"); //Lo abrimos en modo lectura
 
-	if(archivo == NULL){
+	if(archivo==NULL){
 		printf("El archivo  %s no se pudo abrir o no existe.\n", Narchivo);
 		return recive_archivo();
 	}
@@ -20,33 +19,32 @@ FILE *recive_archivo(){
 
 
 void cuenta_direcciones(calle calles[50]){
-	int nX = 0;
-	int nY = 0;
-	for(int i = 0; i<50; i++){
-		if(calles[i].sentido == 'X'){
+	int nX=0;
+	int nY=0;
+	for(int i=0;i<50;i++){
+		if(calles[i].sentido=='X'){
 			nX++;
-		}else if(calles[i].sentido == 'Y'){
+		}else if(calles[i].sentido=='Y'){
 			nY++;
 		}else{
 			continue;
 		}
 	}
-	printf("Sentidos X: %d, Sentidos Y: %d\n", nX, nY);
 }
 
-//En esta función, desglosamos el archivo para trabajar con las calles y todo lo que contenga
+//En esta funcion se lee el archivo y se guardan los datos segun el struct que planteamos
 Datos lee_archivo(FILE *archivo){
 	Datos mapaTuristico;
-	mapaTuristico.nPuntos = 0;
-	mapaTuristico.nCalles = 0;
-	mapaTuristico.nX = 0;
-	mapaTuristico.nY = 0;
+	mapaTuristico.nPuntos=0;
+	mapaTuristico.nCalles=0;
+	mapaTuristico.nX=0;
+	mapaTuristico.nY=0;
 
 	if(archivo==NULL) return mapaTuristico;
 
 	fscanf(archivo, "%d", &mapaTuristico.nCalles);
 
-	for(int i=0; i<mapaTuristico.nCalles; i++){
+	for(int i=0; i<mapaTuristico.nCalles;i++){
 		fscanf(archivo, "%s %f %f %f %f %c", 
 			mapaTuristico.calles[i].nombreCalle, 
 			&mapaTuristico.calles[i].x1,
@@ -55,22 +53,17 @@ Datos lee_archivo(FILE *archivo){
 			&mapaTuristico.calles[i].y2,
 			&mapaTuristico.calles[i].sentido
 			);
-		if(mapaTuristico.calles[i].sentido == 'X') mapaTuristico.nX++;
-		if(mapaTuristico.calles[i].sentido == 'Y') mapaTuristico.nY++;
+		if(mapaTuristico.calles[i].sentido=='X') mapaTuristico.nX++;
+		if(mapaTuristico.calles[i].sentido=='Y') mapaTuristico.nY++;
 	}
 
 	fscanf(archivo, "%d", &mapaTuristico.nPuntos);
 	for(int i=0; i<mapaTuristico.nPuntos;i++){
-		fscanf(archivo, "%s %s %lf",
+		fscanf(archivo, "%s %s %f",
 			mapaTuristico.puntos[i].nombre,
-			&mapaTuristico.puntos[i].ubicacion,
+			mapaTuristico.puntos[i].ubicacion,
 			&mapaTuristico.puntos[i].altura
 			);
 	}
-	printf("Sentidos X: %d, Sentidos Y: %d\n", mapaTuristico.nX, mapaTuristico.nY);
 	return mapaTuristico;
-}
-
-void ocupado(){
-	printf("Aqui deberia ir una funcion que calcule un punto");
 }
