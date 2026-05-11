@@ -1,0 +1,12 @@
+6
+Calle1 0 0 400 0 X
+Calle2 0 100 400 100 X
+Calle3 0 200 400 200 X
+CalleA 100 0 100 200 Y
+CalleB 200 0 200 200 Y
+CalleC 300 0 300 200 Y
+4
+Mercado Calle1 100
+Teatro CalleB 100
+Biblioteca Calle3 300
+Estadio CalleC 0

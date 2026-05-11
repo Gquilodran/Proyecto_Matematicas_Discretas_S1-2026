@@ -1,0 +1,9 @@
+4
+CalleH 0 100 200 100 X
+CalleV 100 0 100 200 Y
+Diagonal 300 0 500 200 X
+CalleX 300 100 500 100 X
+3
+Cruce CalleH 100
+PuntoD Diagonal 400
+Lejano CalleX 400

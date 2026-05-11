@@ -1,0 +1,9 @@
+4
+DiagA 0 0 300 300 X
+DiagB 300 300 600 0 X
+PuntoN 0 300 600 300 X
+CalleV 300 0 300 600 Y
+3
+Inicio DiagA 0
+Medio CalleV 300
+Final DiagB 600
