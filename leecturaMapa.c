@@ -42,6 +42,16 @@ Datos lee_archivo(FILE *archivo){
 
 	if(archivo==NULL) return mapaTuristico;
 
+	if (fscanf(archivo, "%d", &mapaTuristico.nCalles) != 1) {
+		printf("Error: el archivo esta vacio o mal formado.\n");
+		return mapaTuristico;
+	}
+
+	if (mapaTuristico.nCalles == 0) {
+		printf("Error: el archivo no contiene calles.\n");
+		return mapaTuristico;
+	}
+
 	fscanf(archivo, "%d", &mapaTuristico.nCalles);
 
 	for(int i=0; i<mapaTuristico.nCalles;i++){
