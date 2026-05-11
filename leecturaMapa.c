@@ -6,7 +6,7 @@
 //Funcion que abrira el archivo txt con el mapa en caso de que exista
 FILE *recive_archivo(){
 	char Narchivo[100];
-	printf("Ingrese el nombre o ruta del arhivo con el mapa a probar:\n");
+	printf("Ingrese el nombre o ruta del archivo con el mapa a probar:\n");
 	scanf("%s", Narchivo);
 
 	FILE *archivo = fopen(Narchivo, "r"); //Lo abrimos en modo lectura
