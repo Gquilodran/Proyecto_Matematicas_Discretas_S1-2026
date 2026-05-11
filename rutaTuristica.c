@@ -55,11 +55,25 @@ void imprimir_ruta(Grafo *g,Datos *datos,int camino[],int largo,int visitado[]) 
             (g->nodos[v].y - g->nodos[u].y) * (g->nodos[v].y - g->nodos[u].y)
         );
 
-        if (calle_compartida!=-1)
-            printf("  Siga por %s %.1f metros\n",
-                   datos->calles[calle_compartida].nombreCalle, dist);
+        float dx = g->nodos[v].x - g->nodos[u].x;
+        float dy = g->nodos[v].y - g->nodos[u].y;
+        char *direccion;
+
+        if      (dx > 0 && dy == 0) direccion = "Este";
+        else if (dx < 0 && dy == 0) direccion = "Oeste";
+        else if (dy > 0 && dx == 0) direccion = "Norte";
+        else if (dy < 0 && dx == 0) direccion = "Sur";
+        // direcciones diagonales
+        else if (dx > 0 && dy > 0)  direccion = "Noreste";
+        else if (dx > 0 && dy < 0)  direccion = "Sureste";
+        else if (dx < 0 && dy > 0)  direccion = "Noroeste";
+        else                         direccion = "Suroeste";
+
+        if (calle_compartida != -1)
+            printf("  Siga por %s %s %.1f metros\n",
+                   datos->calles[calle_compartida].nombreCalle, direccion, dist);
         else
-            printf("  Avance %.1f metros\n", dist);
+            printf("  Avance %s %.1f metros\n", direccion, dist);
 
         if (g->nodos[v].es_turistico != -1) {
             int t = g->nodos[v].es_turistico;
