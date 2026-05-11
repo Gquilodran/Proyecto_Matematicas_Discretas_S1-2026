@@ -3,18 +3,20 @@
 #include "construyeMapa.c"
 #include "rutaTuristica.c"
 
+Grafo g;
+Datos mapaTuristico;
+
 int main(){
 	while(1)
 	{
 		printf("Hola usuario\n");
 		FILE *archivo = recive_archivo();
-		Datos mapaTuristico = lee_archivo(archivo);
+		mapaTuristico = lee_archivo(archivo);
 		if (mapaTuristico.nCalles == 0 || mapaTuristico.nPuntos == 0) {
 			printf("No hay nada que procesar. Se solicitara que ingrese otro archivo\n");
 			continue;
 		}
 		fclose(archivo);
-		Grafo g;
 
 		calcular_coordenadas_puntos(&mapaTuristico);
 		construir_grafo(&mapaTuristico, &g);
