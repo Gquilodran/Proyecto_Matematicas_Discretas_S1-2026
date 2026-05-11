@@ -52,8 +52,6 @@ Datos lee_archivo(FILE *archivo){
 		return mapaTuristico;
 	}
 
-	fscanf(archivo, "%d", &mapaTuristico.nCalles);
-
 	for(int i=0; i<mapaTuristico.nCalles;i++){
 		fscanf(archivo, "%s %f %f %f %f %c", 
 			mapaTuristico.calles[i].nombreCalle, 

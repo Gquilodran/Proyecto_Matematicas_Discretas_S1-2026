@@ -1,10 +1,12 @@
 #include <stdio.h>
+#include "estructuras.h"
 #include "leecturaMapa.c"
 #include "construyeMapa.c"
 #include "rutaTuristica.c"
 
 Grafo g;
 Datos mapaTuristico;
+int caminos[50][MAX_NODOS];
 
 int main(){
 	while(1)
@@ -20,7 +22,7 @@ int main(){
 
 		calcular_coordenadas_puntos(&mapaTuristico);
 		construir_grafo(&mapaTuristico, &g);
-		recorrer_puntos(&g, &mapaTuristico);
+		recorrer_puntos(&g, &mapaTuristico, caminos);
 
 		printf("Mapa leido exitosamente, que desea hacer ahora?\nIngrese 1 para leer otro mapa, o 2 para salir del programa\n");
 		int eleccion=0;

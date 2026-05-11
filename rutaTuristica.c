@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <math.h>
-#include "estructuras.h"
 
 int bfs(Grafo *g,int origen,int destino,int camino[],int *largo) {
     int visitado[MAX_NODOS]={0};
@@ -72,47 +71,65 @@ void imprimir_ruta(Grafo *g,Datos *datos,int camino[],int largo,int visitado[]) 
     }
 }
 
-void recorrer_puntos(Grafo *g,Datos *datos) {
+void recorrer_puntos(Grafo *g, Datos *datos, int caminos[][MAX_NODOS]) {
     int nodo_punto[50];
-    for (int i=0;i<datos->nPuntos;i++) {
-        nodo_punto[i]=-1;
-        for (int n=0; n<g->n_nodos; n++) {
-            if (g->nodos[n].es_turistico==i) {
-                nodo_punto[i]=n;
+    for (int i = 0; i < datos->nPuntos; i++) {
+        nodo_punto[i] = -1;
+        for (int n = 0; n < g->n_nodos; n++) {
+            if (g->nodos[n].es_turistico == i) {
+                nodo_punto[i] = n;
                 break;
             }
         }
     }
 
-    int visitado[50]={0};
-    int camino[MAX_NODOS];
-    int largo;
-    int ultimo=nodo_punto[0];
-    visitado[0]=1;
+    // verificar si hay ruta factible entre puntos turisticos
+    int largos[50];
+    int visitado_sim[50] = {0};
+    int ultimo_sim = nodo_punto[0];
+    visitado_sim[0] = 1;
+
+    for (int i = 1; i < datos->nPuntos; i++) {
+        if (visitado_sim[i]) continue;
+        if (!bfs(g, ultimo_sim, nodo_punto[i], caminos[i], &largos[i])) {
+            printf("Error: no existe ruta entre %s y %s. Ruta turistica no factible.\n",
+                   datos->puntos[g->nodos[ultimo_sim].es_turistico].nombre,
+                   datos->puntos[i].nombre);
+            return;
+        }
+        // marcar visitados los que se pasan por el camino
+        for (int k = 0; k < largos[i]; k++) {
+            int t = g->nodos[caminos[i][k]].es_turistico;
+            if (t != -1) visitado_sim[t] = 1;
+        }
+        // ultimo_sim siempre es el destino del tramo
+        ultimo_sim = nodo_punto[i];
+        visitado_sim[i] = 1;
+    }
+
+    // mostrar instrucciones si es que hay
+    int visitado[50] = {0};
+    int ultimo = nodo_punto[0];
+    visitado[0] = 1;
 
     printf("\nRUTA TURISTICA\n");
     printf("Partimos en %s\n", datos->puntos[0].nombre);
 
-    for (int i=1; i<datos->nPuntos;i++) {
+    for (int i = 1; i < datos->nPuntos; i++) {
         if (visitado[i]) continue;
 
         printf("\nDe %s a %s:\n",
                datos->puntos[g->nodos[ultimo].es_turistico].nombre,
                datos->puntos[i].nombre);
 
-        if (bfs(g, ultimo, nodo_punto[i], camino, &largo)) {
-            imprimir_ruta(g,datos, camino, largo,visitado);
-            for (int k=0; k<largo; k++) {
-                int t=g->nodos[camino[k]].es_turistico;
-                if (t!=-1) {
-                    visitado[t]=1;
-                    ultimo=camino[k];
-                }
+        imprimir_ruta(g, datos, caminos[i], largos[i], visitado);
+
+        for (int k = 0; k < largos[i]; k++) {
+            int t = g->nodos[caminos[i][k]].es_turistico;
+            if (t != -1) {
+                visitado[t] = 1;
+                ultimo = caminos[i][k];
             }
-        } else {
-            printf("  No hay ruta disponible entre estos puntos.\n");
-            visitado[i]=1;
-            ultimo=nodo_punto[i];
         }
     }
 }
