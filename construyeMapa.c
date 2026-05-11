@@ -106,7 +106,7 @@ void construir_grafo(Datos *datos, Grafo *g) {
             if (interseccion_segmentos(datos->calles[i], datos->calles[j], &ix, &iy))
                 agregar_nodo(g, ix, iy, i, j, -1);
 
-    // 3. Conectar nodos por calle
+    // conectar nodos por calle
     for (int c=0; c<datos->nCalles; c++) {
         int indices[MAX_NODOS];
         int count=0;
@@ -125,9 +125,9 @@ void construir_grafo(Datos *datos, Grafo *g) {
                 float pos_a=(sentido=='X') ? g->nodos[indices[a]].x : g->nodos[indices[a]].y;
                 float pos_b=(sentido=='X') ? g->nodos[indices[b]].x : g->nodos[indices[b]].y;
                 if (pos_a > pos_b) {
-                    int tmp=indices[a];
+                    int aux=indices[a];
                     indices[a]=indices[b];
-                    indices[b] = tmp;
+                    indices[b] = aux;
                 }
             }
         }

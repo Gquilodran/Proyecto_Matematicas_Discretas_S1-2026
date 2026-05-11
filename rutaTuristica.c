@@ -17,14 +17,14 @@ int bfs(Grafo *g,int origen,int destino,int camino[],int *largo) {
         int actual=cola[frente++];
         if (actual==destino) {
             *largo=0;
-            int tmp[MAX_NODOS];
-            int cur=destino;
-            while (cur!=-1) {
-                tmp[(*largo)++]=cur;
-                cur=padre[cur];
+            int aux[MAX_NODOS];
+            int final=destino;
+            while (final!=-1) {
+                aux[(*largo)++]=final;
+                final=padre[final];
             }
             for (int i=0;i<*largo;i++)
-                camino[i]=tmp[*largo - 1 - i];
+                camino[i]=aux[*largo - 1 - i];
             return 1;
         }
         for (int k=0; k<g->nodos[actual].n_vecinos; k++) {
@@ -100,15 +100,8 @@ void recorrer_puntos(Grafo *g,Datos *datos) {
                datos->puntos[g->nodos[ultimo].es_turistico].nombre,
                datos->puntos[i].nombre);
 
-        // Construir lista de nodos turisticos ya visitados a evitar
-        int evitar[50];
-        int n_evitar=0;
-        for (int k=0; k<datos->nPuntos; k++)
-            if (visitado[k] && nodo_punto[k]!=ultimo)
-                evitar[n_evitar++]=nodo_punto[k];
-
         if (bfs(g, ultimo, nodo_punto[i], camino, &largo)) {
-            imprimir_ruta(g,datos,camino,largo,visitado);
+            imprimir_ruta(g,datos, camino, largo,visitado);
             for (int k=0; k<largo; k++) {
                 int t=g->nodos[camino[k]].es_turistico;
                 if (t!=-1) {
@@ -117,21 +110,9 @@ void recorrer_puntos(Grafo *g,Datos *datos) {
                 }
             }
         } else {
-            // Si no hay ruta evitando visitados, intentar sin restricciones
-            if (bfs(g, ultimo, nodo_punto[i], camino, &largo)) {
-                imprimir_ruta(g,datos, camino, largo,visitado);
-                for (int k=0; k<largo; k++) {
-                    int t=g->nodos[camino[k]].es_turistico;
-                    if (t!=-1) {
-                        visitado[t]=1;
-                        ultimo=camino[k];
-                    }
-                }
-            } else {
-                printf("  No hay ruta disponible entre estos puntos.\n");
-                visitado[i]=1;
-                ultimo=nodo_punto[i];
-            }
+            printf("  No hay ruta disponible entre estos puntos.\n");
+            visitado[i]=1;
+            ultimo=nodo_punto[i];
         }
     }
 }
