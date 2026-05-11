@@ -36,7 +36,7 @@ gcc main.c -o mapa.exe -lm
 #En este mismo repositorio se encuentra un documento PDF donde se guarda la documentación más profunda del proyecto y del código realizado. Igualmente se puede revisar el siguiente link que llevara a la página donde se desarollo el documento.
 * **Overleaf:** [Acceder al Informe Final](https://www.overleaf.com/read/vydnvzhvtgwb#af8556)
 
----
+```
 
 ## 👥 Autores
 Proyecto desarrollado por el grupo conformado por:
