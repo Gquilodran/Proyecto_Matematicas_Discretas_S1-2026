@@ -18,7 +18,7 @@ typedef struct {
 
 typedef struct {
 	calle calles[50];
-	punto puntos[50];
+	punto puntos[150];
 	int nCalles;
 	int nPuntos;
 	int nX;
