@@ -6,8 +6,8 @@ Este proyecto se realizo para la asignatura de Matemáticas Discretas, impartida
 
 ## 2. Modelado Matemático
 Aquí puedes describir brevemente los conceptos aplicados:
-* **Estructuras:** (Ej: Grafos dirigidos, conjuntos, árboles de decisión).
-* **Algoritmos:**  Para calcular las distancias, se usara el algoritmo de Dijkstra, usado matematicamente en Digrafos o grafos dirigidos.
+* **Estructuras:** Para trabajar con el mapa, se trabajara este como si fuera un grafo.
+* **Algoritmos:**  Para calcular las distancias, se usara el algoritmo de BFS.
 
 ## 3. Tecnologías Utilizadas
 * **Lenguaje:** Lenguaje C
